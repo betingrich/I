@@ -6,28 +6,53 @@
     <title>Your Valentine's Quote</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
-        /* General Styling */
         body {
             font-family: Arial, sans-serif;
             background: linear-gradient(45deg, #ff0066, #6600cc, #0099ff, #ffcc00);
             background-size: 400% 400%;
             animation: animateBG 8s infinite alternate;
-            text-align: center;
             color: white;
             margin: 0;
             padding: 0;
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            overflow: hidden; /* Prevent scrolling */
+            overflow: hidden;
             position: relative;
         }
 
         @keyframes animateBG {
             0% { background-position: 0% 50%; }
             100% { background-position: 100% 50%; }
+        }
+
+        .typing-text {
+            position: fixed;
+            top: 20px;
+            width: 100%;
+            text-align: center;
+            font-family: monospace;
+            overflow: hidden;
+            white-space: nowrap;
+            animation: typing 3s steps(30, end), blink-caret 0.5s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: white; }
+        }
+
+        .content {
+            text-align: center;
+            padding: 20px;
+            margin-top: 60px;
+            max-width: 90%;
         }
 
         h2 {
@@ -37,12 +62,10 @@
 
         p {
             font-size: 18px;
-            margin: 15px;
+            margin: 15px auto;
             max-width: 80%;
-            word-wrap: break-word;
         }
 
-        /* Copy FAB */
         .copy-btn {
             position: fixed;
             bottom: 110px;
@@ -54,33 +77,23 @@
             border-radius: 50%;
             cursor: pointer;
             box-shadow: 0 0 10px rgba(255, 0, 102, 0.5);
-            font-size: 18px;
+            width: 45px;
+            height: 45px;
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 45px;
-            height: 45px;
         }
 
-        .copy-btn i {
-            font-size: 20px;
-        }
-
-        .copy-btn:hover {
-            background: #cc0052;
-            box-shadow: 0 0 15px rgba(255, 0, 102, 0.8);
-        }
-
-        /* WhatsApp Button */
         .whatsapp-btn {
             position: fixed;
             bottom: 60px;
-            left: 20px;
+            left: 50%;
+            transform: translateX(-50%);
             background: #25D366;
             color: white;
             border: none;
-            padding: 12px 15px;
-            border-radius: 5px;
+            padding: 12px 20px;
+            border-radius: 25px;
             cursor: pointer;
             font-size: 16px;
             display: flex;
@@ -89,83 +102,83 @@
             box-shadow: 0 0 10px rgba(37, 211, 102, 0.5);
         }
 
-        .whatsapp-btn i {
-            font-size: 20px;
+        .footer {
+            position: fixed;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
         }
 
-        .whatsapp-btn:hover {
-            background: #1da851;
-        }
-
-        /* Hamburger Menu */
+        /* Right-aligned menu */
         .menu-btn {
             position: fixed;
             top: 15px;
-            left: 15px;
+            right: 15px;
             background: white;
             border: none;
             padding: 10px;
-            border-radius: 5px;
+            border-radius: 50%;
             cursor: pointer;
-            font-size: 18px;
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            width: 45px;
+            height: 45px;
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 45px;
-            height: 45px;
-        }
-
-        .menu-btn i {
-            font-size: 20px;
         }
 
         .menu-dropdown {
             position: fixed;
-            top: 60px;
-            left: 15px;
+            top: 70px;
+            right: 15px;
             background: rgba(0, 0, 0, 0.7);
             padding: 10px;
             border-radius: 5px;
             display: none;
             flex-direction: column;
+            min-width: 120px;
         }
 
         .menu-dropdown a {
             color: white;
             text-decoration: none;
-            padding: 5px 0;
-            display: block;
+            padding: 8px 12px;
+            font-size: 14px;
         }
 
         .menu-dropdown a:hover {
-            text-decoration: underline;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
         }
     </style>
 </head>
 <body>
+    <div class="typing-text">Tap the menu button for more options ▼</div>
 
-    <!-- Hamburger Menu -->
     <button class="menu-btn" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
     <div class="menu-dropdown" id="menu">
         <a href="boyfriend.html">Boyfriend</a>
         <a href="girlfriend.html">Girlfriend</a>
     </div>
 
-    <!-- Quote Section -->
-    <h2 id="greeting"></h2>
-    <p id="quote"></p>
+    <div class="content">
+        <h2 id="greeting"></h2>
+        <p id="quote"></p>
+    </div>
 
-    <!-- Copy Button -->
     <button class="copy-btn" onclick="copyQuote()"><i class="fas fa-copy"></i></button>
 
-    <!-- WhatsApp Channel Button -->
     <button class="whatsapp-btn" onclick="window.location.href='https://whatsapp.com/channel/0029Vajvy2kEwEjwAKP4SI0x'">
         <i class="fab fa-whatsapp"></i> Join Our Channel
     </button>
 
+    <div class="footer">
+        Made by Marisel
+    </div>
+
     <script>
-        // Get stored name
         let name = localStorage.getItem("userName") || "Dear";
         let quotes = [
             "You are loved more than you know.",
@@ -184,19 +197,25 @@
         document.getElementById("greeting").innerText = `Happy Valentine's, ${name}!`;
         document.getElementById("quote").innerText = randomQuote;
 
-        // Copy Quote to Clipboard
         function copyQuote() {
             navigator.clipboard.writeText(randomQuote).then(() => {
                 alert("Quote copied to clipboard!");
             });
         }
 
-        // Toggle Menu
         function toggleMenu() {
             let menu = document.getElementById("menu");
             menu.style.display = menu.style.display === "flex" ? "none" : "flex";
         }
-    </script>
 
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            let menu = document.getElementById('menu');
+            let menuBtn = document.querySelector('.menu-btn');
+            if (!menu.contains(event.target) && !menuBtn.contains(event.target)) {
+                menu.style.display = 'none';
+            }
+        });
+    </script>
 </body>
 </html>
