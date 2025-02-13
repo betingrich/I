@@ -15,6 +15,12 @@
             color: white;
             margin: 0;
             padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
         }
 
         /* Background Animation */
@@ -23,68 +29,127 @@
             100% { background-position: 100% 50%; }
         }
 
-        /* Container */
-        .container {
-            margin-top: 15%;
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.4);
-            display: inline-block;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
-            animation: fadeIn 1s ease-in-out;
-        }
-
-        /* Fade In Animation */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
         h2 {
-            font-size: 24px;
+            font-size: 26px;
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
         }
 
         p {
-            font-size: 18px;
-            margin: 15px 0;
+            font-size: 20px;
+            margin: 20px 10px;
+            padding: 10px;
+            max-width: 80%;
         }
 
-        button {
+        /* Floating Action Buttons */
+        .fab {
+            position: fixed;
+            bottom: 70px;
+            right: 20px;
             background: #ff0066;
             color: white;
             border: none;
-            padding: 12px 20px;
-            font-size: 16px;
-            border-radius: 5px;
+            padding: 15px;
+            font-size: 18px;
+            border-radius: 50%;
             cursor: pointer;
             box-shadow: 0 0 10px rgba(255, 0, 102, 0.5);
             transition: 0.3s;
         }
 
-        button:hover {
+        .fab:hover {
             background: #cc0052;
-            box-shadow: 0 0 15px rgba(255, 0, 102, 0.8);
+        }
+
+        /* WhatsApp Button */
+        .whatsapp {
+            bottom: 20px;
+            background: #25d366;
         }
 
         /* Footer */
         footer {
-            margin-top: 20px;
-            padding: 10px;
+            position: fixed;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
             font-size: 16px;
-            color: white;
             text-shadow: 0 0 5px rgba(255, 255, 255, 0.6);
+        }
+
+        /* Hamburger Menu */
+        .menu {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .menu:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        .menu div {
+            width: 30px;
+            height: 4px;
+            background: white;
+            margin: 6px 0;
+        }
+
+        /* Dropdown Menu */
+        .dropdown {
+            display: none;
+            position: absolute;
+            top: 60px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 5px;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .dropdown a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 8px;
+        }
+
+        .dropdown a:hover {
+            background: rgba(255, 255, 255, 0.3);
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h2 id="greeting"></h2>
-        <p id="quote"></p>
-        <button onclick="window.location.href='boyfriend.html'">Continue</button>
+    <!-- Hamburger Menu -->
+    <div class="menu" onclick="toggleMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
     </div>
 
+    <!-- Dropdown Menu -->
+    <div id="dropdownMenu" class="dropdown">
+        <a href="boyfriend.html">Boyfriend</a>
+        <a href="girlfriend.html">Girlfriend</a>
+    </div>
+
+    <!-- Valentine's Quote -->
+    <h2 id="greeting"></h2>
+    <p id="quote"></p>
+
+    <!-- Copy Button -->
+    <button class="fab" onclick="copyQuote()">📋</button>
+
+    <!-- WhatsApp Button -->
+    <button class="fab whatsapp" onclick="window.location.href='https://whatsapp.com/channel/0029Vajvy2kEwEjwAKP4SI0x'">W</button>
+
+    <!-- Footer -->
     <footer>
         <p>Marisel Made It.</p>
     </footer>
@@ -127,6 +192,16 @@
         let randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
         document.getElementById("greeting").innerText = `Happy Valentine's, ${name}!`;
         document.getElementById("quote").innerText = randomQuote;
+
+        function copyQuote() {
+            navigator.clipboard.writeText(randomQuote);
+            alert("Quote copied!");
+        }
+
+        function toggleMenu() {
+            let menu = document.getElementById("dropdownMenu");
+            menu.style.display = menu.style.display === "block" ? "none" : "block";
+        }
     </script>
 
 </body>
