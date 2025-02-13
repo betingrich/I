@@ -3,219 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Valentine's Quote</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <title>Enter Your Name</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(45deg, #ff0066, #6600cc, #0099ff, #ffcc00);
-            background-size: 400% 400%;
-            animation: animateBG 8s infinite alternate;
-            color: white;
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
             min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             display: flex;
             flex-direction: column;
             align-items: center;
-            overflow: hidden;
-            position: relative;
-        }
-
-        @keyframes animateBG {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 100% 50%; }
-        }
-
-        .typing-text {
-            position: fixed;
-            top: 20px;
-            width: 100%;
-            text-align: center;
-            font-family: monospace;
-            overflow: hidden;
-            white-space: nowrap;
-            animation: typing 3s steps(30, end), blink-caret 0.5s step-end infinite;
-        }
-
-        @keyframes typing {
-            from { width: 0 }
-            to { width: 100% }
-        }
-
-        @keyframes blink-caret {
-            from, to { border-color: transparent }
-            50% { border-color: white; }
-        }
-
-        .content {
-            text-align: center;
+            justify-content: center;
             padding: 20px;
-            margin-top: 60px;
-            max-width: 90%;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            transform: translateY(0);
+            transition: transform 0.3s ease;
+            max-width: 500px;
+            width: 100%;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
         }
 
         h2 {
-            font-size: 24px;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+            color: #2d3748;
+            margin-bottom: 30px;
+            font-size: 2em;
+            font-weight: 600;
+            letter-spacing: 1px;
         }
 
-        p {
-            font-size: 18px;
-            margin: 15px auto;
-            max-width: 80%;
-        }
-
-        .copy-btn {
-            position: fixed;
-            bottom: 110px;
-            right: 20px;
-            background: #ff0066;
-            color: white;
-            border: none;
+        input {
+            width: 100%;
             padding: 12px;
-            border-radius: 50%;
-            cursor: pointer;
-            box-shadow: 0 0 10px rgba(255, 0, 102, 0.5);
-            width: 45px;
-            height: 45px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .whatsapp-btn {
-            position: fixed;
-            bottom: 60px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #25D366;
-            color: white;
-            border: none;
-            padding: 12px 20px;
+            margin-bottom: 20px;
+            border: 2px solid #764ba2;
             border-radius: 25px;
-            cursor: pointer;
-            font-size: 16px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 0 10px rgba(37, 211, 102, 0.5);
+            outline: none;
+            font-size: 1.1em;
+            text-align: center;
         }
 
-        .footer {
+        button {
+            background: linear-gradient(45deg, #4f46e5, #7c3aed);
+            border: none;
+            padding: 15px 40px;
+            color: white;
+            border-radius: 50px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+            width: 180px;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(79, 70, 229, 0.4);
+        }
+
+        footer {
             position: fixed;
             bottom: 20px;
-            width: 100%;
             text-align: center;
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.8);
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.9em;
         }
 
-        /* Right-aligned menu */
-        .menu-btn {
-            position: fixed;
-            top: 15px;
-            right: 15px;
-            background: white;
-            border: none;
-            padding: 10px;
-            border-radius: 50%;
-            cursor: pointer;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-            width: 45px;
-            height: 45px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        @media (max-width: 480px) {
+            .container {
+                padding: 30px;
+            }
+            
+            button {
+                width: 100%;
+                margin: 10px 0;
+            }
         }
 
-        .menu-dropdown {
-            position: fixed;
-            top: 70px;
-            right: 15px;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 10px;
-            border-radius: 5px;
-            display: none;
-            flex-direction: column;
-            min-width: 120px;
-        }
-
-        .menu-dropdown a {
-            color: white;
-            text-decoration: none;
-            padding: 8px 12px;
-            font-size: 14px;
-        }
-
-        .menu-dropdown a:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 3px;
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
-    <div class="typing-text">Tap the menu button for more options ▼</div>
 
-    <button class="menu-btn" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
-    <div class="menu-dropdown" id="menu">
-        <a href="boyfriend.html">Boyfriend</a>
-        <a href="girlfriend.html">Girlfriend</a>
+    <div class="container">
+        <h2>Enter Your Name</h2>
+        <input type="text" id="userName" placeholder="Your Name">
+        <button onclick="saveName()">Continue</button>
     </div>
 
-    <div class="content">
-        <h2 id="greeting"></h2>
-        <p id="quote"></p>
-    </div>
-
-    <button class="copy-btn" onclick="copyQuote()"><i class="fas fa-copy"></i></button>
-
-    <button class="whatsapp-btn" onclick="window.location.href='https://whatsapp.com/channel/0029Vajvy2kEwEjwAKP4SI0x'">
-        <i class="fab fa-whatsapp"></i> Join Our Channel
-    </button>
-
-    <div class="footer">
-        Made by Marisel
-    </div>
+    <footer>
+        <p>Marisel Made It.</p>
+    </footer>
 
     <script>
-        let name = localStorage.getItem("userName") || "Dear";
-        let quotes = [
-            "You are loved more than you know.",
-            "Wishing you a day as special as you are.",
-            "Your heart shines brighter than the stars.",
-            "Love and happiness surround you today and always.",
-            "You are a gift to everyone around you.",
-            "May your day be filled with love and warmth.",
-            "You bring joy to everyone you meet.",
-            "Love is a journey, and I’m grateful to have you in my life.",
-            "No matter where life takes us, I’m glad you’re part of my story.",
-            "Happiness looks good on you—keep shining!"
-        ];
-
-        let randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
-        document.getElementById("greeting").innerText = `Happy Valentine's, ${name}!`;
-        document.getElementById("quote").innerText = randomQuote;
-
-        function copyQuote() {
-            navigator.clipboard.writeText(randomQuote).then(() => {
-                alert("Quote copied to clipboard!");
-            });
-        }
-
-        function toggleMenu() {
-            let menu = document.getElementById("menu");
-            menu.style.display = menu.style.display === "flex" ? "none" : "flex";
-        }
-
-        // Close menu when clicking outside
-        document.addEventListener('click', function(event) {
-            let menu = document.getElementById('menu');
-            let menuBtn = document.querySelector('.menu-btn');
-            if (!menu.contains(event.target) && !menuBtn.contains(event.target)) {
-                menu.style.display = 'none';
+        function saveName() {
+            let name = document.getElementById("userName").value;
+            if (name) {
+                localStorage.setItem("userName", name);
+                window.location.href = "quotes.html";
             }
-        });
+        }
     </script>
+
 </body>
 </html>
