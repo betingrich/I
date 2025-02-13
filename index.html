@@ -3,135 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Select Your Gender</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Quotes for Girlfriend</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
     <style>
-        * {
+        /* General Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(45deg, #ff0066, #6600cc, #0099ff, #ffcc00);
+            background-size: 400% 400%;
+            animation: animateBG 8s infinite alternate;
+            text-align: center;
+            color: white;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
         }
 
-        body {
-            min-height: 100vh;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+        /* Background Animation */
+        @keyframes animateBG {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        header {
             padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
         }
 
-        .container {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 40px 50px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        /* Grid for Quotes */
+        .quote-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        /* Quote Tile */
+        .quote-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            position: relative;
             text-align: center;
-            transform: translateY(0);
-            transition: transform 0.3s ease;
-            max-width: 500px;
-            width: 100%;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
 
-        .container:hover {
-            transform: translateY(-5px);
+        .quote-box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
         }
 
-        h2 {
-            color: #2d3748;
-            margin-bottom: 30px;
-            font-size: 2em;
-            font-weight: 600;
-            letter-spacing: 1px;
+        .quote-box p {
+            font-size: 16px;
+            margin-bottom: 10px;
         }
 
-        button {
-            background: linear-gradient(45deg, #4f46e5, #7c3aed);
+        /* Copy Button (Icon Only) */
+        .copy-btn {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: transparent;
             border: none;
-            padding: 15px 40px;
-            margin: 10px;
             color: white;
-            border-radius: 50px;
-            font-size: 1.1em;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
-            width: 180px;
+            font-size: 20px;
         }
 
-        button:nth-child(2) {
-            background: linear-gradient(45deg, #ec4899, #f472b6);
-            box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
+        .copy-btn:hover {
+            color: #ffcc00;
         }
 
-        button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 25px rgba(79, 70, 229, 0.4);
-        }
-
-        button:nth-child(2):hover {
-            box-shadow: 0 8px 25px rgba(236, 72, 153, 0.4);
-        }
-
+        /* Footer */
         footer {
-            position: fixed;
-            bottom: 20px;
-            text-align: center;
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 0.9em;
-        }
-
-        .whatsapp-btn {
-            display: inline-block;
-            background: linear-gradient(45deg, #25d366, #128c7e);
-            color: white;
-            padding: 10px 25px;
-            border-radius: 50px;
-            text-decoration: none;
-            margin-top: 10px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(18, 140, 126, 0.3);
-        }
-
-        .whatsapp-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 25px rgba(18, 140, 126, 0.4);
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 30px;
-            }
-            
-            button {
-                width: 100%;
-                margin: 10px 0;
-            }
-        }
-
-        /* Animation */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .container {
-            animation: fadeIn 0.6s ease-out;
+            margin-top: 20px;
+            padding: 10px;
+            font-size: 14px;
+            font-weight: bold;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h2>Select Your Gender</h2>
-        <button onclick="window.location.href='name.html?gender=boy'">Boy</button>
-        <button onclick="window.location.href='name.html?gender=girl'">Girl</button>
+    <header>
+        <h1>Valentine's Quotes for Your Love</h1>
+    </header>
+
+    <div class="quote-grid">
+        <div class="quote-box">
+            <p>"You make my heart skip a beat, my love. Happy Valentine's!"</p>
+            <button class="copy-btn" onclick="copyToClipboard(this)">
+                <i class="fas fa-copy"></i>
+            </button>
+        </div>
+        <div class="quote-box">
+            <p>"My love for you grows stronger every day. I’m so lucky to have you."</p>
+            <button class="copy-btn" onclick="copyToClipboard(this)">
+                <i class="fas fa-copy"></i>
+            </button>
+        </div>
+        <div class="quote-box">
+            <p>"You are my sunshine, my moonlight, my everything!"</p>
+            <button class="copy-btn" onclick="copyToClipboard(this)">
+                <i class="fas fa-copy"></i>
+            </button>
+        </div>
+        <div class="quote-box">
+            <p>"Every love story is beautiful, but ours is my favorite."</p>
+            <button class="copy-btn" onclick="copyToClipboard(this)">
+                <i class="fas fa-copy"></i>
+            </button>
+        </div>
+        <div class="quote-box">
+            <p>"Happy Valentine's, my angel! You are the love of my life."</p>
+            <button class="copy-btn" onclick="copyToClipboard(this)">
+                <i class="fas fa-copy"></i>
+            </button>
+        </div>
     </div>
 
-    <footer>
-        <p>Marisel Made It.</p>
-        <a href="https://whatsapp.com/channel/0029Vajvy2kEwEjwAKP4SI0x" class="whatsapp-btn">Join Our WhatsApp Channel</a>
-    </footer>
+    <footer>Marisel Made It.</footer>
+
+    <script>
+        function copyToClipboard(button) {
+            const text = button.previousElementSibling.innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                alert("Quote copied to clipboard!");
+            });
+        }
+    </script>
 </body>
 </html>
